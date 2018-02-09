@@ -1,12 +1,18 @@
 #include <iostream>
 #include <string>
 #include<stdlib.h>
+#include <time.h>
+#include<bits/stdc++.h>
 
 using namespace std;
 
 //Menu principal
 int menu();
 
+//Ejercicio1
+void Ejercicio1();
+
+int* ordenarArreglo(int*, int);
 //Ejercicio2
 void Ejercicio2();
 
@@ -16,21 +22,111 @@ string* crearCombinaciones(string*, string*);
 
 string* ordenarCombinaciones(string*);
 
+//Ejercicio3
+void Ejercicio3();
+
+void agregarFecha(vector <string>&);
+
+int menuE3();
+
 int main(){
 	bool salir = false;
 	while (!salir){
 		switch (menu()){
 			case 1:
+				Ejercicio1();
 				break;
 			case 2:
 				Ejercicio2();
 				break;
 			case 3:
+				Ejercicio3();
 				break;
 		}
 	}
 	return 0;
 }
+
+//Ejercicio3
+void Ejercicio3(){
+	vector <string> fechas;
+	bool salir = false;
+	while(!salir){
+		switch(menuE3()){
+			case 1:
+				agregarFecha(fechas);
+				break;
+			case 2:
+				for(int i=0; i < fechas.size(); i++){
+					cout<<fechas.at(i)<<endl;
+					string dia;
+					int dia_s;
+					int dia_m = atoi(fechas.at(i).substr(6,2).c_str());
+					int siglo = atoi(fechas.at(i).substr(0,2).c_str());
+					int ano_simple = atoi(fechas.at(i).substr(2,2).c_str());
+					int mes = atoi(fechas.at(i).substr(4,2).c_str());
+					
+				}
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			default:
+				salir = true;
+		}
+	}
+}
+
+void agregarFecha(vector <string>& fechas){
+	string date;
+	cin >> date;
+	fechas.push_back(date);
+}
+
+int menuE3(){
+	int opcion;
+	cout << "Ejercicio 3"<<endl
+		<< "1) Agregar Fecha"<<endl
+		<< "2) Listar Todo" <<endl
+		<< "3) Listar Ordenado"<<endl
+		<< "4) Listar por Consulta"<<endl;
+	cin>>opcion;
+	return opcion;
+}
+
+//Ejercicio1
+void Ejercicio1(){
+	cout<<"Ingrese el tamaño del arreglo de numeros:";
+	int size;
+	cin >> size;
+	int* arreglo = new int[size];
+	srand(time(NULL));
+	for (int i=0 ; i < size; i++){
+		arreglo[i] = rand () % 100 + 1;
+		cout<<arreglo[i];
+	}
+
+	if (size==5){
+		arreglo = ordenarArreglo(arreglo, size);
+		cout << "La mediana es: " + arreglo[2];
+	}
+}
+
+int* ordenarArreglo(int* combinaciones, int size){
+	//cout<<"sdfghj"<<endl;
+	for (int i=0; i<size ; i++){
+		for(int j=0; j<size-1; j++){
+			if (combinaciones[j] > combinaciones[j+1]){
+				int guardar = combinaciones[j];
+				combinaciones[j] = combinaciones[j+1];
+				combinaciones[j+1] = guardar;
+			}
+		}
+	}
+	return combinaciones;
+}	
+
 
 //Ejercicio2
 
